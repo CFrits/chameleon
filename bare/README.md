@@ -9,3 +9,6 @@
 - **lcd1a**               Display Hello World on the LCD.
 - **uart2a**              Add an uart_receive function and a minimal receive panel message implementation.
 - **uart2b-reset**        Add a reset option, so no power cycle is needed anymore to load new firmware.
+- **led1e-blink-busy**    Rearrange source code. Blink a led with a busy loop.
+- **led1e-timer**         Add timer interupts and blink the led with a timer.
+
