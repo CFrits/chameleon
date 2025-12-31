@@ -1,0 +1,101 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+dram             0x0000000040000000 0x0000000000800000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000040000000      0x340
+ *(.text)
+ .text          0x0000000040000000       0x8a out/start.o
+                0x000000004000000e                _start
+                0x0000000040000020                reset
+                0x000000004000004e                uart_init
+                0x000000004000005a                uart_transmit
+                0x0000000040000074                uart_receive
+ *fill*         0x000000004000008a        0x2 
+ .text          0x000000004000008c      0x290 out/main.o
+                0x000000004000008c                panel_receive
+                0x0000000040000198                uart_transmit_string
+                0x0000000040000248                main
+ *(.text*)
+ *(.debug*)
+                0x0000000040000320                . = ALIGN (0x10)
+ *fill*         0x000000004000031c        0x4 
+ *(.eh_frame)
+                0x0000000040000320                . = ALIGN (0x10)
+ *(.gnu.linkonce.t.*)
+                0x0000000040000320                . = ALIGN (0x4)
+                0x0000000040000320                __CTOR_LIST__ = .
+ *(.ctors)
+                0x0000000040000320        0x4 LONG 0x0
+                0x0000000040000324                __DTOR_LIST__ = .
+ *(.dtors)
+                0x0000000040000324        0x4 LONG 0x0
+ *(.rodata)
+ .rodata        0x0000000040000328        0xe out/main.o
+ *(.rodata*)
+ *(.gcc_except_table)
+                0x0000000040000336                . = ALIGN (0x2)
+ *(.init)
+ *(.fini)
+ *(.lit)
+                0x0000000040000340                . = ALIGN (0x10)
+ *fill*         0x0000000040000336        0xa 
+
+.data           0x0000000040000340        0x0
+ *(.shdata)
+ *(.data)
+ .data          0x0000000040000340        0x0 out/start.o
+ .data          0x0000000040000340        0x0 out/main.o
+ *(.gnu.linkonce.d.*)
+                0x0000000040000340                . = ALIGN (0x10)
+
+.bss            0x0000000040000340        0x4
+                0x0000000040000340                . = ALIGN (0x4)
+ *(.shbss)
+ *(.bss)
+ .bss           0x0000000040000340        0x0 out/start.o
+ .bss           0x0000000040000340        0x4 out/main.o
+                0x0000000040000340                received_ack
+ *(COMMON)
+                0x0000000040000344                . = ALIGN (0x4)
+                0x0000000040000000                DRAM_START = 0x40000000
+                0x0000000040800000                DRAM_END = (DRAM_START + 0x800000)
+                0x0000000040000000                TEXT_START = ADDR (.text)
+                0x0000000040000340                TEXT_END = (TEXT_START + SIZEOF (.text))
+                0x0000000040000340                DATA_START = ADDR (.data)
+                0x0000000040000340                DATA_END = (DATA_START + SIZEOF (.data))
+                0x0000000040000340                BSS_START = ADDR (.bss)
+                0x0000000040000344                BSS_END = (BSS_START + SIZEOF (.bss))
+                0x0000000040000344                FREEMEM_START = BSS_END
+                0x0000000040800000                FREEMEM_END = DRAM_END
+LOAD out/start.o
+LOAD out/main.o
+LOAD /home/fwiersma/disk/opt/rtems6-m68k/bin/../lib/gcc/m68k-rtems6/12.2.1/m5206/libgcc.a
+OUTPUT(out/firmware.elf elf32-m68k)
+
+.comment        0x0000000000000000       0x63
+ .comment       0x0000000000000000       0x63 out/main.o
+                                         0x64 (size before relaxing)
+
+Cross Reference Table
+
+Symbol                                            File
+_start                                            out/start.o
+main                                              out/main.o
+                                                  out/start.o
+panel_receive                                     out/main.o
+received_ack                                      out/main.o
+reset                                             out/start.o
+                                                  out/main.o
+uart_init                                         out/start.o
+                                                  out/main.o
+uart_receive                                      out/start.o
+                                                  out/main.o
+uart_transmit                                     out/start.o
+                                                  out/main.o
+uart_transmit_string                              out/main.o
