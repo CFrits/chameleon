@@ -3,7 +3,7 @@
 // Use the minimal configuration.
 #define MICROPY_CONFIG_ROM_LEVEL                (MICROPY_CONFIG_ROM_LEVEL_MINIMUM)
 
-#define MICROPY_BANNER_NAME_AND_VERSION         "ChamPython v0.1 based on MicroPython v1.27.0"
+#define MICROPY_BANNER_NAME_AND_VERSION         "ChamPython v0.2 based on MicroPython v1.27.0"
 #define MICROPY_BANNER_MACHINE                  "Chameleon coldfire"
 
 // MicroPython configuration.
