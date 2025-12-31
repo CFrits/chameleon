@@ -6,7 +6,7 @@ The chameleon still needs to be programmed with the original toolkit of the deve
 It's still available from the website [Chameleon](https://chameleon.synth.net/english/index.shtml)
 The debugging interface is however very limited and is not very useful and not even possible when the
 application is flashed onto the chameleon.
-There a toolkit program is included which is made to run in linux. 
+Therefore a toolkit program is included which is made to run on linux. 
 There is no makefile for the toolkit program but it can simple be compiled with the following command:
 
     gcc toolkit.c -o toolkit -lpthread -Wall
