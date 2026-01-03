@@ -51,6 +51,8 @@ void wait_for_ack() {
     }
 }
 
+#define CHAR_CTRL_C (3)
+
 void panel_receive(unsigned char ch) {
     static int len = 0, subcmd = 0, cmd = 0;
     static enum Panelstate state = LENGTH;
@@ -82,6 +84,12 @@ void panel_receive(unsigned char ch) {
             if (subcmd == 0x03) {
                 ringbuf[writeptr] = ch;
                 writeptr = (writeptr + 1) % BUFFER_LENGTH;
+
+                // TODO: Experimental. Consider checking the mp_interrupt_char
+                // or put the code outside this function.
+                if (ch == CHAR_CTRL_C) {
+                    mp_sched_keyboard_interrupt();
+                }
             }
 
             break;
@@ -178,6 +186,7 @@ char panel_read() {
     unsigned char ch;
 
     while (writeptr == readptr) {
+        // TODO: Consider calling MICROPY_EVENT_POLL_HOOK
     }
 
     ch = ringbuf[readptr];
@@ -185,3 +194,10 @@ char panel_read() {
 
     return ch;
 }
+
+void panel_init() {
+    mp_printf(&mp_plat_print, "Initialize panel\n");
+    //uart_transmit(0x02);
+    //uart_transmit(0x00);
+}
+

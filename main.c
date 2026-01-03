@@ -63,7 +63,9 @@ static char heap[1024*1024];
 #endif
 
 void nlr_jump_fail(void *val) { 
-    mp_hal_stdout_tx_str("uncaught exception:\r\n");
+    mp_printf(&mp_plat_print, "FATAL: uncaught exception %p\n", val);
+    mp_obj_print_exception(&mp_plat_print, MP_OBJ_FROM_PTR(val));
+
     while (1); 
 }
 

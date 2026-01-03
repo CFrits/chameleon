@@ -40,6 +40,7 @@ SRC_C = \
 	main.c \
 	cham_mphal.c \
 	panel.c \
+	midi.c \
 	shared/libc/string0.c \
 	shared/libc/printf.c \
 	shared/readline/readline.c \
@@ -48,6 +49,7 @@ SRC_C = \
 SRC_AS = \
 	start.s \
 	uartasm.s \
+	midiasm.s \
 
 SRC_QSTR += $(SRC_C)
 

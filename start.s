@@ -96,7 +96,12 @@ _clear_bss_end:
         move.l  #default_handler,(%a0)                  | Hard coded breakpoint handler.
 
 # Autovector 0 ((24 + 0) * 4 = 96 = 0x60)
-.equ VECTOR_UART2,              0x20000060              | Set vector for interrupt for Uart 2.
+.equ VECTOR_UART1,              0x20000060              | Set vector for interrupt for Uart 1.
+        movea.l #VECTOR_UART1,%a0
+        move.l  #uart1_handler,(%a0)                    | Hard coded breakpoint handler.
+
+# Autovector 1 ((24 + 1) * 4 = 100 = 0x64)
+.equ VECTOR_UART2,              0x20000064              | Set vector for interrupt for Uart 2.
         movea.l #VECTOR_UART2,%a0
         move.l  #uart2_handler,(%a0)                    | Hard coded breakpoint handler.
 

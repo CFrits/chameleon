@@ -26,3 +26,4 @@ void panel_receive();
 void panel_transmit(unsigned char ch);
 void panel_transmit_string (const char *msg,  size_t len);
 char panel_read();
+void panel_init();

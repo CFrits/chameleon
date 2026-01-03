@@ -30,6 +30,7 @@
 #include "interrupts.h"
 
 #include "uart.h"
+#include "midi.h"
 #include "panel.h"
 
 #include <stdio.h>
@@ -39,6 +40,8 @@ extern int received_ack;
 
 void mp_hal_init(void) {
     uart_init();
+    midi_init();
+    panel_init();
     enable_interrupts();
 }
 

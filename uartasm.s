@@ -36,10 +36,10 @@ uart_init:
                                                         | Bit     7 Autovector Enable = 0
                                                         | Bit   4:2 Interupt level = 1
                                                         | Bit   0:1 Interupt priority = 0
-        move.b  %d0,MCF5206E_ICR13                      | Level 1 interrupt, Priority 0, Autovector OFF. Vector 24
+        move.b  %d0,MCF5206E_ICR13                      | Level 1 interrupt, Priority 0, Autovector OFF. Vector 25
 
-        move.b  #24,%d0
-        move.b  %d0,MCF5206E_UIVR                       | Set interrupt vector to 24.
+        move.b  #25,%d0
+        move.b  %d0,MCF5206E_UIVR                       | Set interrupt vector to 25.
 
         move.b  #0x10,%d0
         move.b  %d0,MCF5206E_UCR                        | Reset Mode Register. The Mode Register Ptr now points to UMR1
